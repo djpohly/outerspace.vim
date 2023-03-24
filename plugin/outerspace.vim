@@ -10,8 +10,8 @@
 " Inspired by vim-indentguides by Thaer Khawaja:
 "   https://github.com/thaerkh/vim-indentguides
 
-if !has("patch-8.2.5066")
-  echoe "vim-outerspace requires Vim 8.2 patch 5066"
+if !has("patch-8.2.5066") && !has("nvim")
+  echoe "vim-outerspace requires Vim 8.2 patch 5066 or Neovim"
   finish
 endif
 
@@ -53,7 +53,7 @@ function! s:DictFromListOption(str)
     if l:idx == -1
       let l:dict[l:item] = ''
     else
-      let l:dict[slice(l:item, 0, l:idx)] = l:item[l:idx + 1:]
+      let l:dict[l:item[0 : l:idx - 1]] = l:item[l:idx + 1:]
     endif
   endfor
   return l:dict
